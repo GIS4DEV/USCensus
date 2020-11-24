@@ -23,18 +23,19 @@ varsProf <- load_variables(2018, "acs5/profile", cache = TRUE)
 # example usage: download non-Hispanic white population data by tract for Bronx, NY based on 2018 ACS 5-year average
 bronxBG <- get_acs(state="NY", county="005", geography="block group", 
                    variables=c(white="B03002_003",totalre="B03002_001"), 
-                   year=2018, geometry=TRUE, output="wide", key="1fb2d48d1ae3f73a19d620f258ec9f823ad09b25")
+                   year=2018, geometry=TRUE, output="wide", key="<key>")
 
 # write results to a shapefile
-st_write(bronxBG, "bronxBG.shp")
+dir.create("data")
+st_write(bronxBG, "data/bronxBG.shp")
 
 # example usage: download poverty data by tract for Bronx, NY based on 2018 ACS 5-year average (this is not available at block group level)
 bronxTract <- get_acs(state="NY", county="005", geography="tract", 
                       variables=c(pop_ps="S1701_C01_001", belpov="S1701_C02_001"),
-                      year=2018, geometry=TRUE, output="wide", key="1fb2d48d1ae3f73a19d620f258ec9f823ad09b25")
+                      year=2018, geometry=TRUE, output="wide", key="<key>")
 
 # write results to a shapefile
-st_write(bronxTract, "bronxTract.shp")
+st_write(bronxTract, "data/bronxTract.shp")
 
 # make a choropleth map in R with ggplot
 install.packages("ggplot2")
